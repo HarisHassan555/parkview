@@ -1,0 +1,1130 @@
+documennt 1 raw data:
+Account:
+045820014169645
+Currency:
+PKR
+Account Type: Current Deposit Account Customer
+From Date:
+12-Aug-2025
+To Date:
+20-Aug-2025
+Statement Date & Time: 20-Aug-2025 03:30:09
+Page:
+1 / 109
+Txn. Date
+Value Date
+Txn. Type
+Transaction
+Ref No. /
+Instrument
+/ Voucher
+No.
+12-Aug-2025
+12-Aug-2025 12-Aug-2025
+RAAST Transfer RAAST Transter
+12-Aug-2025 12-Aug-2025
+Incoming IBFT
+Incoming IBFT
+Account Title:
+Customer Address:
+OLD Number:
+Bank Name:
+Branch Name:
+Soneri Trans@ct e-Statement
+VISION DEVELOPERS PVT LTD
+55-C II GULBERG III LAHORE
+045820014169645
+Soneri Bank Limited
+Park View City Branch-0458
+Br. Name
+Park View
+LHR BR.-0458
+Soneri Cok
+Narration /
+Transaction
+Detail
+Balance
+Brought
+Forward
+RAAST Transfer-
+MPGP2P
+To:
+PKS6MEZN0012
+480107124225-
+MEEZAN BANK
+AETMAD
+TRADERS
+ZAFARWAL
+Ref:576375708
+11215743-
+FT25224BSVLM
+Incoming IBFT-
+1Link Switch
+From:
+03009770577-
+MMB
+QAISAR
+QAYOOM
+Ref:373807081
+1220033-
+FT25224140T8
+(COK
+Withdrawal
+Deposit
+Balance
+Remitter
+0.00
+105,908.00
+55,812,779.70
+CR
+55,918,687.70 MEEZAN
+CR
+BANK
+0.00
+27,258.00
+55,945,945.70 MMB
+CR
+Soneri Bank
+Source
+Account
+Destination
+Account
+Ref 2
+Ref 3
+PKS6MEZN PK46SONE0D4:
+001248010
+820014169645
+7124225
+030097705
+77
+PK46SONE0D:
+2001416964
+
+document 2 raw data:
+Account:
+045820014169645
+Currency:
+PKR
+Account Type: Current Deposit Account Customer
+From Date:
+12-Aug-2025
+To Date:
+20-Aug-2025
+Statement Date & Time: 20-Aug-2025 03:30:09
+Page:
+21
+Txn. Date
+Value Date
+Txn. Type
+Transaction
+Ref No. /
+Instrument
+/ Voucher
+No.
+12-Aug-2025
+12-Aug-2025
+RAAST Transfer
+RAAST Transfer
+12-AUg-2025 12-AU8-2025
+RAST Transfer RAAST Transfer
+12-AU8-2025 12-Aug-2025
+RAST Transfer RAAST Transfer
+Account Title:
+Customer Address:
+OLD Number:
+Bank Name:
+Branch Name:
+Soneri Trans@ct e-Statement
+VISION DEVELOPERS PVT LTD
+55-CII GULBERG III LAHORE
+045820014169645
+Soneri Bank Limited
+Park View City Branch-0458
+Br. Name
+Narration/ Withdrawal
+Transaction
+0.00
+63,024.00
+Balance
+Remitter
+Park View
+LHR BR.-0458
+Park View
+LHR BR.-0458
+RAAST Transfer-
+MPGP2P
+PK61MEZN0002
+640106938387-
+MEEZAN BANK
+NEELMA
+FAROOQ
+Ref:011137810
+811220111-
+FT25224B2GNV
+RAAST Transfer.
+MPGP2P
+To:
+PKS4BAHLO109
+182200624801-
+BANK ALHABIB
+LIMITED
+JUNAD UL
+HASSAN
+Ref:013937950
+811220139-
+FT25224J7HZ3
+RAAST Transfer-
+181650001615-
+COMMERCIAL
+BANK LIMITED
+FT25224WOFSF
+BANK
+0.00
+4,400.00
+556,013,369.70 BANK
+CR
+ALHABIB
+LIMITED
+0.00
+250,539.00
+56,263,908.70 ASKARI
+CR
+COMMERC
+LAL BANK
+LIMITED
+Soneri Bank
+Source
+Destination
+Account
+Account
+PK61MEZN PK46SONE0045
+000264010
+820014169645
+6938387
+Ref 3
+PKS4BAHL PKAGSONE0045
+010918220
+0624801
+820014169645
+00028165 82005036965
+0001615
+820014169645
+
+document 3 raw data:
+Account:
+045820014169645
+Currency:
+PKR
+Account Type: Current Deposit Account Customer
+From Date:
+12-Aug-2025
+To Date:
+20-Aug-2025
+Statement Date & Time: 20-Aug-2025 03:30:10
+Page:
+3/
+Txn. Date
+Value Date
+Txn. Type
+12-Aug-2025
+12-Aug-2025
+RAAST Transfer
+Transaction
+Ref No. /
+Instrument
+/ Voucher
+No.
+RAAST Transfer
+12-Aug-2025 12-Aug-2025
+RAAST Transfer RAAST Transfer
+12-AU8-2025 12-Au8-2025
+Incoming IBFT
+Incoming IBFT
+Account Title:
+Customer Address:
+OLD Number:
+Bank Name:
+Branch Name:
+Soneri Trans@ct e-Statement
+VISION DEVELOPERS PVT LTD
+55-C II GULBERG III LAHORE
+045820014169645
+Soneri Bank Limited
+Park View City Branch-0458
+Br. Name
+Narration / Withdrawal
+Transaction
+Park View
+LHR BR-0458
+0.00
+4,000.00
+Balance
+Remitter
+HABIB
+BANK
+LIMITED
+Park View
+LHR BR.- 0453
+Soneri cox-
+9001
+PKBAHAB0012
+487900081701-
+HABIB BANK
+LIMITED
+NADIA ATIQ
+Ref:024538150
+811220245-
+FT252245RN37
+RAAST Transfer-
+MPGP2P
+To:
+PKOZUNILO1090
+00332066479-
+UNITED BANK
+LIMITED
+IMDAD
+Ref:023838120
+811220238-
+FT25224TWO2T
+Incoming IBET-
+1Link Switch
+0300970577
+MMB
+QAISAR
+QAYOOM
+Ref:536440081
+1220243-
+FT25224FRR2Q1
+56,267,908.70
+CR
+0.00
+64,529.00
+56,332,437.70 UNITED
+CR BANK
+LIMITED
+0.00
+3,000.00
+56,335437.20
+MMB
+Soneri Bank
+Account
+Actination
+PKBAHABB PK46SONEOD45
+001248790 820014169645
+0081701
+Ref 3
+OZUNILO PKAGSONED
+9000332 820014169
+066479
+030037705 82030169645
+
+document 4 raw data:
+Account:
+045820014169645
+Currency:
+PKR
+Account Type: Current Deposit Account Customer
+From Date:
+12-Aug-2025
+To Date:
+20-Aug-2025
+Statement Date & Time: 20-Aug-2025 03:30:10
+Page:
+4/
+Txn. Date
+Value Date
+Txn. Type
+12-Aug-2025 12-Aug-2025
+Transaction
+Ref No. /
+Instrument
+/ Voucher
+No.
+RAAST Transfer
+RAAST Transter
+12-Aug-2025
+12-Aug-2025
+RAAST Transfer
+RAAST Transfer
+12-AU8-2025
+12-Aug-2025
+Incoming IBFT
+Incoming IBFT
+Soneri Trans@ct e-Statement
+Account Title:
+VISION DEVELOPERS PVT LTD
+Customer Address: 55-C II GULBERG III LAHORE
+OLD Number:
+045820014169645
+Bank Name:
+Soneri Bank Limited
+Branch Name:
+Park View City Branch-0458
+Br. Name
+Narration / Withdrawal
+Transaction
+Deposit
+Balance
+Remitter
+ark Vier
+HR BR.-045
+Park View
+LHR BR.-D458
+Soneri Cok-
+9001
+ZAAST Transfer
+MPGP2F
+TRIDASCM0002
+181650001615-
+ASKARI
+COMMERCIAL
+BANK LIMITED
+MUHAMMAD
+ASGHAR
+Ref:025938220
+811220259-
+FT25224HHTRV
+RAAST Transfer.
+MPGP2P |
+To:
+PKS2BAHLO223
+098102153801-
+BANK ALHABIB
+LIMITED
+JAVED IQBAL
+Ref:044238530
+811220442-
+FT25224LBPVX
+Incoming IBFT-
+1Link Switch
+From:
+PK38MEZN0002
+310105046396-
+MBL
+MUHAMMAD
+IDREES,
+Ref:160568081
+1220328-
+FT25224X773X1
+COK
+56,341, 67.20
+COMMERC
+LIMITED
+0.00
+2,270.00
+56,344,137.70 BANK
+CR
+ALHABIB
+uMITED
+0.00
+12,748.00
+56,350,385. 70
+MBL
+Soneri Bank
+Destination
+Account Account
+Ref 2
+Ref 3
+PK19ASCM PKAGSONEOD45
+000218165
+820014169645
+0001615
+PKS2BAHL PKA6SONE0045
+022309810
+820014169645
+2153801
+PK3BMEZN PKA6SONE0D45
+000231010
+820014169645
+5046396
+
+document 5 raw data:
+Account:
+045820014169645
+Currency:
+PKR
+Account Type: Current Deposit Account Customer
+From Date:
+12-Aug-2025
+To Date:
+20-Aug-2025
+Statement Date & Time: 20-Aug-202503:30:11
+Page:
+5 /
+Txn. Date
+Value Date
+Txn. Type
+12-Aug-2025 12-Aug-2025
+RAAST Transfer
+Transaction
+Ref No. /
+Instrument
+/ Voucher
+No.
+RAAST Transfer
+12-AUg-2025 12-Aug-2025
+RAAST Transfer
+RAAST Transfer
+Soneri Trans@ct e-Statement
+Account Title:
+VISION DEVELOPERS PVT LTD
+Customer Address:
+55-C II GULBERG III LAHORE
+OLD Number:
+045820014169645
+Bank Name:
+Soneri Bank Limited
+Branch Name:
+Park View City Branch-0458
+Br. Name
+Park View
+LHR BR.-0458
+Narration /
+Transaction
+Detail
+Withdrawal
+Deposit
+As rester.
+0.00
+3,000.00
+Balance
+Remitter
+56,359,885.70 ASKARI
+COMMERC
+IAL BANK
+LIMITED
+Park Vien
+HR BR.-0458
+COMMERCIAL
+BANK LIMITED
+MUHAMMAD
+ASGHAR
+Ref:058386808
+1122050B
+FT25224DRO1N
+MAST Transfer
+To:
+PK54BAHLO109
+182200624801-
+BANK ALHABIB
+LIMITED
+JUNAID UL
+HASSAN
+Ref:054638770
+811220546-
+FT25224QP093
+0.00
+334.00
+56,360,219.70
+BANK
+CR
+ALHABIB
+LIMITED
+Soneri Bank
+Source
+Account
+Destination
+Ref 3
+PK19ASCM
+000218165
+0001615
+PKA6SONE0045
+820014169645
+PK54BAHL PKA6SONE004S
+010918220
+820014169645
+0624801
+
+document 6 raw data:
+Account:
+045820014169645
+Currency:
+PKR
+Account Type:
+Current Deposit Account Customer
+From Date:
+12-Aug-2025
+To Date:
+20-Aug-2025
+Statement Date & Time: 20-Aug-2025 03:30:12
+Page:
+6/
+Txn. Date
+Value Date
+Txn. Type
+12-Aug-2025 12-Aug-2025
+Incoming IBFT
+Transaction
+Ref No. /
+Instrument
+/ Voucher
+No.
+Incoming IBFT
+12-Aug-2025
+12-Aug-2025
+Incoming IBFT
+Incoming IBFT
+12-Aug-2025
+12-Aug-2025
+RAAST Transfer
+RAAST Transfer
+Account Title:
+Customer Address:
+OLD Number:
+Branch Name:
+Soneri Trans@ct e-Statement
+VISION DEVELOPERS PVT LTD
+55-C II GULBERG III LAHORE
+045820014169645
+Soneri Bank Limited
+Park View City Branch-0458
+Br. Name
+Soneri COK-
+9001
+Soneri Cok-
+9001
+Park View
+LHR BR.-0458
+Narration /
+Transaction
+Detail
+Incoming IBFT-
+1Link Switch
+From:
+PK38MEZN0002
+310105046396-
+MBL
+MUHAMMAD
+IDREES,
+Ref:199887081
+1220527-
+FT25224TSRL1
+ICOK
+Incoming IBFT-
+1Link Switch
+From:
+PK38MEZN0002
+310105046396-
+MBL
+MUHAMMAD
+IDREES,
+Ref:182807081
+1220445-
+FT25224ZB1PS\
+COK
+RIAST Transfer-
+MPGP2P
+To:
+PX49HABB0053
+707000113203-
+HABIB BANK
+LIMITED
+RAVI TRADERS
+Ref:111939450
+811221119-
+FT25224WB2PZ
+Withdrawal
+Deposit
+Balance
+0.00
+9,748.00
+56,369,967.70
+Remitter
+MBL
+0.00
+3,000.00
+56,372,967.70 MBL
+CR
+0.00
+50,536.00
+56,423,503.70 HABIB
+LIMITED
+Soneri Bank
+Source
+Account
+PK38MEZN
+000231010
+5046396
+Destination
+Account
+PK46SONE0045
+820014169645
+Ref 3
+K38MEZN PK46SONEOD
+000231010
+8200141696
+5046396
+PK49HABB PK46SONE0045
+005370700
+820014169645
+0113203
+
+
+desired result for document 1:
+{
+  "Account Information": {
+    "Account": "045820014169645",
+    "Account Title": "VISION DEVELOPERS PVT LTD",
+    "Currency": "PKR",
+    "Account Type": "Current Deposit Account Customer",
+    "Customer Address": "55-C II GULBERG III LAHORE",
+    "OLD Number": "045820014169645",
+    "Bank Name": "Soneri Bank Limited",
+    "Branch Name": "Park View City Branch-0458",
+    "From Date": "12-Aug-2025",
+    "To Date": "20-Aug-2025",
+    "Statement Date & Time": "20-Aug-2025 03:30:09",
+    "Page": "1 / 109"
+  },
+  "Transactions": [
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "",
+      "Transaction Ref No. / Instrument / Voucher No.": "",
+      "Branch Name": "",
+      "Narration / Transaction Detail": "Balance Brought Forward",
+      "Withdrawal": "",
+      "Deposit": "",
+      "Balance": "55,812,779.70 CR",
+      "Remitter Bank": "",
+      "Source Account": "",
+      "Destination Account": "",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK56MEZN001248001714225 - MEEZAN BANK ATEMA TRADERS RAFARWAL Rf#56745370B 11212543: FT52294BVLM",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "105,908.00",
+      "Balance": "55,918,687.70 CR",
+      "Remitter Bank": "MEEZAN BANK",
+      "Source Account": "PK56MEZN001248001714225",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "Incoming IBFT",
+      "Transaction Ref No. / Instrument / Voucher No.": "Incoming IBFT- Link Switch From: 03009770577- MMB QAISAR QAYOOM Rf#30738081 1120023: FT52244J0T8 COK",
+      "Branch Name": "Soneri COK-9001",
+      "Narration / Transaction Detail": "Incoming IBFT",
+      "Withdrawal": "0.00",
+      "Deposit": "27,258.00",
+      "Balance": "55,945,945.70 CR",
+      "Remitter Bank": "MMB",
+      "Source Account": "03009770577",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    }
+  ]
+}
+
+
+desired result for document 2:
+{
+  "Account Information": {
+    "Account": "045820014169645",
+    "Account Title": "VISION DEVELOPERS PVT LTD",
+    "Currency": "PKR",
+    "Account Type": "Current Deposit Account Customer",
+    "Customer Address": "55-C II GULBERG III LAHORE",
+    "OLD Number": "045820014169645",
+    "Bank Name": "Soneri Bank Limited",
+    "Branch Name": "Park View City Branch-0458",
+    "From Date": "12-Aug-2025",
+    "To Date": "20-Aug-2025",
+    "Statement Date & Time": "20-Aug-2025 03:30:09",
+    "Page": "2 / 2"
+  },
+  "Transactions": [
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK61MEZN0002460106938837 - MEEZAN BANK NEELMA FAROOQ Rf#0101137810 81212011: FT522248GYV",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "63,024.00",
+      "Balance": "56,008,969.70 CR",
+      "Remitter Bank": "MEEZAN BANK",
+      "Source Account": "PK61MEZN0002460106938837",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK54BAHL100918200246881 - BANK ALHABIB LIMITED JUNAID UL HASSAN Rf#012139750 81201239: FT52241H2R3",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "4,400.00",
+      "Balance": "56,013,369.70 CR",
+      "Remitter Bank": "BANK ALHABIB LIMITED",
+      "Source Account": "PK54BAHL100918200246881",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK19ASCM0002181650001615 - ASKARI COMMERCIAL BANK LIMITED MUHAMMAD ASGHAR Rf#013377308 11201203: FT5224W0SF",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "250,539.00",
+      "Balance": "56,263,908.70 CR",
+      "Remitter Bank": "ASKARI COMMERCIAL BANK LIMITED",
+      "Source Account": "PK19ASCM0002181650001615",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    }
+  ]
+}
+
+
+desired result for document 3:
+{
+  "Account Information": {
+    "Account": "045820014169645",
+    "Account Title": "VISION DEVELOPERS PVT LTD",
+    "Currency": "PKR",
+    "Account Type": "Current Deposit Account Customer",
+    "Customer Address": "55-C II GULBERG III LAHORE",
+    "OLD Number": "045820014169645",
+    "Bank Name": "Soneri Bank Limited",
+    "Branch Name": "Park View City Branch-0458",
+    "From Date": "12-Aug-2025",
+    "To Date": "20-Aug-2025",
+    "Statement Date & Time": "20-Aug-2025 03:30:10",
+    "Page": "3 / 109"
+  },
+  "Transactions": [
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK84HABB00124879048790081701 - HABIB BANK LIMITED NADIA ATIQ Rf#0245815D 81202542: FT52254SN37",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "4,000.00",
+      "Balance": "56,267,908.70 CR",
+      "Remitter Bank": "HABIB BANK LIMITED",
+      "Source Account": "PK84HABB00124879048790081701",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK02UNIL00109000332066479 - UNITED BANK LIMITED IMDAD Rf#02483812D 81202389: FT5224W0QT",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "64,529.00",
+      "Balance": "56,332,437.70 CR",
+      "Remitter Bank": "UNITED BANK LIMITED",
+      "Source Account": "PK02UNIL00109000332066479",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "Incoming IBFT",
+      "Transaction Ref No. / Instrument / Voucher No.": "Incoming IBFT- Link Switch From: 03009770577- MMB QAISAR QAYOOM Rf#30640081 1120023: FT5224FRQ2J COK",
+      "Branch Name": "Soneri COK-9001",
+      "Narration / Transaction Detail": "Incoming IBFT",
+      "Withdrawal": "0.00",
+      "Deposit": "3,000.00",
+      "Balance": "56,335,437.70 CR",
+      "Remitter Bank": "MMB",
+      "Source Account": "03009770577",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    }
+  ]
+}
+
+
+desired result for doc 4:
+{
+  "Account Information": {
+    "Account": "045820014169645",
+    "Account Title": "VISION DEVELOPERS PVT LTD",
+    "Currency": "PKR",
+    "Account Type": "Current Deposit Account Customer",
+    "Customer Address": "55-C II GULBERG III LAHORE",
+    "OLD Number": "045820014169645",
+    "Bank Name": "Soneri Bank Limited",
+    "Branch Name": "Park View City Branch-0458",
+    "From Date": "12-Aug-2025",
+    "To Date": "20-Aug-2025",
+    "Statement Date & Time": "20-Aug-2025 03:30:10",
+    "Page": "4 / 109"
+  },
+  "Transactions": [
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK19ASCM0002181650001615 - ASKARI COMMERCIAL BANK LIMITED MUHAMMAD ASGHAR Ref:00293820 81122059: FT52244HTRV",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "6,430.00",
+      "Balance": "56,341,867.70 CR",
+      "Remitter Bank": "ASKARI COMMERCIAL BANK LIMITED",
+      "Source Account": "PK19ASCM0002181650001615",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK52BAHL202309B1ALH3801 - BANK ALHABIB LIMITED JAVED IQBAL Ref:02483830 81122044: FT52244BVPL",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "2,270.00",
+      "Balance": "56,344,137.70 CR",
+      "Remitter Bank": "BANK ALHABIB LIMITED",
+      "Source Account": "PK52BAHL202309B1ALH3801",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "Incoming IBFT",
+      "Transaction Ref No. / Instrument / Voucher No.": "Incoming IBFT- Link Switch From: PK38MEZN0002310105046396 - MBL MUHAMMAD NUMAN Ref:0656881 122032: FT5224X773X COK",
+      "Branch Name": "Soneri COK-9001",
+      "Narration / Transaction Detail": "Incoming IBFT",
+      "Withdrawal": "0.00",
+      "Deposit": "12,748.00",
+      "Balance": "56,356,885.70 CR",
+      "Remitter Bank": "MBL",
+      "Source Account": "PK38MEZN0002310105046396",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    }
+  ]
+}
+
+
+desired result for doc 5:
+{
+  "Account Information": {
+    "Account": "045820014169645",
+    "Account Title": "VISION DEVELOPERS PVT LTD",
+    "Currency": "PKR",
+    "Account Type": "Current Deposit Account Customer",
+    "Customer Address": "55-C II GULBERG III LAHORE",
+    "OLD Number": "045820014169645",
+    "Bank Name": "Soneri Bank Limited",
+    "Branch Name": "Park View City Branch-0458",
+    "From Date": "12-Aug-2025",
+    "To Date": "20-Aug-2025",
+    "Statement Date & Time": "20-Aug-2025 03:30:11",
+    "Page": "5 / 109"
+  },
+  "Transactions": [
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK19ASCM0002181650001615 - ASKARI COMMERCIAL BANK LIMITED MUHAMMAD ASGHAR Ref:0886888 1120209: FT52240BIN",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "3,000.00",
+      "Balance": "56,359,885.70 CR",
+      "Remitter Bank": "ASKARI COMMERCIAL BANK LIMITED",
+      "Source Account": "PK19ASCM0002181650001615",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK54BAHL100918200246881 - BANK ALHABIB LIMITED JUNAID UL HASSAN Ref:06543870 81122046: FT52240P093",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "334.00",
+      "Balance": "56,360,219.70 CR",
+      "Remitter Bank": "BANK ALHABIB LIMITED",
+      "Source Account": "PK54BAHL100918200246881",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    }
+  ]
+}
+
+
+desired result for doc 5:
+{
+  "Account Information": {
+    "Account": "045820014169645",
+    "Account Title": "VISION DEVELOPERS PVT LTD",
+    "Currency": "PKR",
+    "Account Type": "Current Deposit Account Customer",
+    "Customer Address": "55-C II GULBERG III LAHORE",
+    "OLD Number": "045820014169645",
+    "Bank Name": "Soneri Bank Limited",
+    "Branch Name": "Park View City Branch-0458",
+    "From Date": "12-Aug-2025",
+    "To Date": "20-Aug-2025",
+    "Statement Date & Time": "20-Aug-2025 03:30:11",
+    "Page": "5 / 109"
+  },
+  "Transactions": [
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK19ASCM0002181650001615 - ASKARI COMMERCIAL BANK LIMITED MUHAMMAD ASGHAR Ref:0886888 1120209: FT52240BIN",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "3,000.00",
+      "Balance": "56,359,885.70 CR",
+      "Remitter Bank": "ASKARI COMMERCIAL BANK LIMITED",
+      "Source Account": "PK19ASCM0002181650001615",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK54BAHL100918200246881 - BANK ALHABIB LIMITED JUNAID UL HASSAN Ref:06543870 81122046: FT52240P093",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "334.00",
+      "Balance": "56,360,219.70 CR",
+      "Remitter Bank": "BANK ALHABIB LIMITED",
+      "Source Account": "PK54BAHL100918200246881",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    }
+  ]
+}
+
+
+desired result for doc 6:
+{
+  "Account Information": {
+    "Account": "045820014169645",
+    "Account Title": "VISION DEVELOPERS PVT LTD",
+    "Currency": "PKR",
+    "Account Type": "Current Deposit Account Customer",
+    "Customer Address": "55-C II GULBERG III LAHORE",
+    "OLD Number": "045820014169645",
+    "Bank Name": "Soneri Bank Limited",
+    "Branch Name": "Park View City Branch-0458",
+    "From Date": "12-Aug-2025",
+    "To Date": "20-Aug-2025",
+    "Statement Date & Time": "20-Aug-2025 03:30:12",
+    "Page": "6 / 109"
+  },
+  "Transactions": [
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "Incoming IBFT",
+      "Transaction Ref No. / Instrument / Voucher No.": "Incoming IBFT- Link Switch From: PK38MEZN0002310105046396 - MBL MUHAMMAD IDREES Ref:19887081 1220527: FT52245TL1 COK",
+      "Branch Name": "Soneri COK-9001",
+      "Narration / Transaction Detail": "Incoming IBFT",
+      "Withdrawal": "0.00",
+      "Deposit": "9,748.00",
+      "Balance": "56,369,967.70 CR",
+      "Remitter Bank": "MBL",
+      "Source Account": "PK38MEZN0002310105046396",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "Incoming IBFT",
+      "Transaction Ref No. / Instrument / Voucher No.": "Incoming IBFT- Link Switch From: PK38MEZN0002310105046396 - MBL MUHAMMAD IDREES Ref:18587081 122045: FT52244PSJ COK",
+      "Branch Name": "Soneri COK-9001",
+      "Narration / Transaction Detail": "Incoming IBFT",
+      "Withdrawal": "0.00",
+      "Deposit": "3,000.00",
+      "Balance": "56,372,967.70 CR",
+      "Remitter Bank": "MBL",
+      "Source Account": "PK38MEZN0002310105046396",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    },
+    {
+      "Txn Date": "12-Aug-2025",
+      "Value Date": "12-Aug-2025",
+      "Txn Type": "RAAST Transfer",
+      "Transaction Ref No. / Instrument / Voucher No.": "MPGP2P Tc: PK49HABB005907003 - HABIB BANK LIMITED RAVI TRADERS Ref:11394950 81122119: FT52244W8PZ",
+      "Branch Name": "Park View LHR BR.-0458",
+      "Narration / Transaction Detail": "RAAST Transfer- MPGP2P",
+      "Withdrawal": "0.00",
+      "Deposit": "50,536.00",
+      "Balance": "56,423,503.70 CR",
+      "Remitter Bank": "HABIB BANK LIMITED",
+      "Source Account": "PK49HABB005907003",
+      "Destination Account": "PK4650SNEOD45820014169645",
+      "Ref 1": "",
+      "Ref 2": "",
+      "Ref 3": ""
+    }
+  ]
+}
