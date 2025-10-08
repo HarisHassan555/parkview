@@ -558,7 +558,7 @@ const UserDocumentsScreen = ({ userId, onBackToUsers, onViewDocument }) => {
               <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                 <h4 className="text-sm font-medium text-blue-900 mb-2">How it works:</h4>
                 <ul className="text-xs text-blue-800 space-y-1">
-                  <li>• </li>
+                  <li>• Upload Excel file with required columns</li>
                   <li>• Use sync button to compare documents</li>
                   <li>• Documents matching 3+ fields are verified</li>
                   <li>• Results show in document status</li>

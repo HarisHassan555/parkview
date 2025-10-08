@@ -247,7 +247,7 @@ const DashboardScreen = () => {
       </div>
     );
   };
-
+    
   // Simple Bar Chart Component
   const BarChart = ({ data, title, xLabel, yLabel }) => {
     const maxValue = Math.max(...data.map(item => item.value));
@@ -520,7 +520,7 @@ const DashboardScreen = () => {
                               <div>
                                 <span className="text-gray-500">User:</span>
                                 <span className="ml-2 text-gray-900">
-                                  {dashboardData.users.find(u => u.id === document.userId)?.name || 'Unknown'}
+                                  {dashboardData.users.find(u => u.id === document.userId)?.name}
                                 </span>
                               </div>
                               <div>

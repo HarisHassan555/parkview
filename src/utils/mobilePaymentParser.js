@@ -19,18 +19,18 @@ export const parseMobilePaymentReceipt = (ocrText) => {
   // Step 2: Simple position-based extraction
   const result = {
     service: service,
-    transactionId: '',
-    date: '',
-    time: '',
-    amount: 0,
-    fromName: '',
-    toName: '',
-    fromPhone: '',
-    toPhone: '',
-    fromAccount: '',
-    toAccount: '',
-    status: 'Success',
-    currency: 'PKR',
+    transactionId: null,
+    date: null,
+    time: null,
+    amount: null,
+    fromName: null,
+    toName: null,
+    fromPhone: null,
+    toPhone: null,
+    fromAccount: null,
+    toAccount: null,
+    status: null,
+    currency: null,
     rawText: ocrText
   }
   

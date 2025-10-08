@@ -6,6 +6,7 @@ import {
   updateDoc 
 } from 'firebase/firestore';
 import { db } from '../firebase/services.js';
+import { compareDocumentWithExcelFlexible } from './excelAnalyzer.js';
 
 /**
  * Read and parse the uploaded Excel file
@@ -109,12 +110,16 @@ const compareDocumentWithExcel = (document, excelEntry) => {
 };
 
 /**
- * Find matching Excel entry for a document
+ * Find matching Excel entry for a document using flexible field matching
  */
 const findMatchingExcelEntry = (document, excelData) => {
   for (const excelEntry of excelData) {
-    if (compareDocumentWithExcel(document, excelEntry)) {
-      return excelEntry;
+    const comparison = compareDocumentWithExcelFlexible(document, excelEntry);
+    if (comparison.isMatch) {
+      return {
+        ...excelEntry,
+        matchDetails: comparison
+      };
     }
   }
   return null;

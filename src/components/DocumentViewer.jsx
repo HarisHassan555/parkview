@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import { getDocumentById } from '../firebase/documentService';
-import { parseBankStatement, parseSoneriBankStatement } from '../utils/bankStatementParser';
 import * as XLSX from 'xlsx';
 
 const DocumentViewer = ({ documentId, onBack }) => {
   const [document, setDocument] = useState(null);
-  const [parsedData, setParsedData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -18,17 +16,6 @@ const DocumentViewer = ({ documentId, onBack }) => {
       setLoading(true);
       const docData = await getDocumentById(documentId);
       setDocument(docData);
-      
-      // Parse bank statement if it's a bank statement document
-      if (docData?.documentType === 'bank_statement' && docData?.rawOcrText) {
-        let parsed;
-        if (docData.rawOcrText.includes('Soneri') || docData.rawOcrText.includes('Soneri Bank')) {
-          parsed = parseSoneriBankStatement(docData.rawOcrText);
-        } else {
-          parsed = parseBankStatement(docData.rawOcrText);
-        }
-        setParsedData(parsed);
-      }
     } catch (err) {
       setError('Failed to load document');
       console.error('Error loading document:', err);
@@ -100,20 +87,20 @@ const DocumentViewer = ({ documentId, onBack }) => {
     if (document.documentType === 'mobile_payment' && document.extractedData) {
       const paymentData = document.extractedData;
       Object.assign(excelData, {
-        'Service Provider': paymentData.service || 'N/A',
-        'Transaction ID': paymentData.transactionId || 'N/A',
-        'Amount': paymentData.amount || 'N/A',
-        'Currency': paymentData.currency || 'N/A',
-        'Status': paymentData.status || 'N/A',
-        'Date': paymentData.date || 'N/A',
-        'Time': paymentData.time || 'N/A',
-        'From Name': paymentData.fromName || 'N/A',
-        'From Phone': paymentData.fromPhone || 'N/A',
-        'From Account': paymentData.fromAccount || 'N/A',
-        'To Name': paymentData.toName || 'N/A',
-        'To Phone': paymentData.toPhone || 'N/A',
-        'To Account': paymentData.toAccount || 'N/A',
-        'Description': paymentData.description || 'N/A'
+        'Service Provider': paymentData.service,
+        'Transaction ID': paymentData.transactionId,
+        'Amount': paymentData.amount,
+        'Currency': paymentData.currency,
+        'Status': paymentData.status,
+        'Date': paymentData.date,
+        'Time': paymentData.time,
+        'From Name': paymentData.fromName,
+        'From Phone': paymentData.fromPhone,
+        'From Account': paymentData.fromAccount,
+        'To Name': paymentData.toName,
+        'To Phone': paymentData.toPhone,
+        'To Account': paymentData.toAccount,
+        'Description': paymentData.description
       });
     }
 
@@ -233,152 +220,7 @@ const DocumentViewer = ({ documentId, onBack }) => {
           </div>
 
           {/* Extracted Data */}
-          {document.documentType === 'bank_statement' && parsedData ? (
-            <div className="space-y-6">
-              {/* Verification Status */}
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold text-gray-800">Bank Statement</h2>
-                  {getVerificationBadge(document)}
-                </div>
-              </div>
-
-              {/* Account Information */}
-              {parsedData?.accountInfo && (
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-4">Account Information</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {Object.entries(parsedData.accountInfo).map(([key, value]) => (
-                      <div key={key} className="p-3 bg-gray-50 rounded-lg">
-                        <p className="text-sm text-gray-600 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
-                        <p className="font-medium text-gray-900">{value || 'N/A'}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Summary */}
-              {parsedData?.summary && (
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-4">Summary</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div className="text-center p-4 bg-blue-50 rounded-lg">
-                      <p className="text-2xl font-bold text-blue-600">{parsedData.summary.totalTransactions}</p>
-                      <p className="text-sm text-blue-800">Total Transactions</p>
-                    </div>
-                    <div className="text-center p-4 bg-green-50 rounded-lg">
-                      <p className="text-2xl font-bold text-green-600">PKR {formatCurrency(parsedData.summary.totalDeposits)}</p>
-                      <p className="text-sm text-green-800">Total Deposits</p>
-                    </div>
-                    <div className="text-center p-4 bg-red-50 rounded-lg">
-                      <p className="text-2xl font-bold text-red-600">PKR {formatCurrency(parsedData.summary.totalWithdrawals)}</p>
-                      <p className="text-sm text-red-800">Total Withdrawals</p>
-                    </div>
-                    <div className="text-center p-4 bg-purple-50 rounded-lg">
-                      <p className="text-2xl font-bold text-purple-600">PKR {formatCurrency(parsedData.summary.finalBalance)}</p>
-                      <p className="text-sm text-purple-800">Final Balance</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Bank Statement Table */}
-              {parsedData?.transactions && parsedData.transactions.length > 0 && (
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-4">Transaction Details</h2>
-                  <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200 border border-gray-300">
-                      <thead className="bg-gray-50">
-                        <tr>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Txn. Date
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Value Date
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Txn. Type
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Transaction Ref No. / Instrument / Voucher No.
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Br. Name
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Narration / Transaction Detail
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Withdrawal
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Deposit
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Balance
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Remitter Bank
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Source Account
-                          </th>
-                          <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-300">
-                            Destination Account
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
-                        {parsedData.transactions.map((transaction, index) => (
-                          <tr key={index} className="hover:bg-gray-50">
-                            <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900 border-r border-gray-300">
-                              {transaction.txnDate}
-                            </td>
-                            <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900 border-r border-gray-300">
-                              {transaction.valueDate}
-                            </td>
-                            <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900 border-r border-gray-300">
-                              {transaction.txnType}
-                            </td>
-                            <td className="px-3 py-4 text-sm text-gray-900 border-r border-gray-300 max-w-xs">
-                              {transaction.transactionRef || 'N/A'}
-                            </td>
-                            <td className="px-3 py-4 text-sm text-gray-900 border-r border-gray-300 max-w-xs">
-                              {transaction.branchName || 'N/A'}
-                            </td>
-                            <td className="px-3 py-4 text-sm text-gray-900 border-r border-gray-300 max-w-md">
-                              <div className="max-w-xs truncate" title={transaction.narration}>
-                                {transaction.narration || 'N/A'}
-                              </div>
-                            </td>
-                            <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900 border-r border-gray-300 text-right">
-                              {formatCurrency(transaction.withdrawal)}
-                            </td>
-                            <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900 border-r border-gray-300 text-right">
-                              {formatCurrency(transaction.deposit)}
-                            </td>
-                            <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900 border-r border-gray-300 text-right font-medium">
-                              {formatCurrency(transaction.balance)}
-                            </td>
-                            <td className="px-3 py-4 text-sm text-gray-900 border-r border-gray-300 max-w-xs">
-                              {transaction.remitterBank || 'N/A'}
-                            </td>
-                            <td className="px-3 py-4 text-sm text-gray-900 border-r border-gray-300 max-w-xs">
-                              {transaction.sourceAccount || 'N/A'}
-                            </td>
-                            <td className="px-3 py-4 text-sm text-gray-900 max-w-xs">
-                              {transaction.destinationAccount || 'N/A'}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
-            </div>
-          ) : document.documentType === 'mobile_payment' && document.extractedData?.data ? (
+          {document.documentType === 'mobile_payment' && document.extractedData?.data ? (
             <div className="bg-white rounded-lg shadow-md p-6 mb-6">
               <div className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Payment Receipt</h2>
@@ -445,7 +287,7 @@ const DocumentViewer = ({ documentId, onBack }) => {
                     <div className="space-y-2">
                       <div>
                         <span className="text-sm text-gray-600">Name:</span>
-                        <div className="font-medium text-gray-900">{document.extractedData.data.fromName || 'N/A'}</div>
+                        <div className="font-medium text-gray-900">{document.extractedData.data.fromName}</div>
                       </div>
                       {document.extractedData.data.fromPhone && (
                         <div>
@@ -468,7 +310,7 @@ const DocumentViewer = ({ documentId, onBack }) => {
                     <div className="space-y-2">
                 <div>
                         <span className="text-sm text-gray-600">Name:</span>
-                        <div className="font-medium text-gray-900">{document.extractedData.data.toName || 'N/A'}</div>
+                        <div className="font-medium text-gray-900">{document.extractedData.data.toName}</div>
                 </div>
                       {document.extractedData.data.toPhone && (
                 <div>

@@ -5,17 +5,18 @@ A React application built with Vite and Tailwind CSS that allows residents to up
 ## Features
 
 - **Document Upload**: Drag and drop or click to upload images (JPG, PNG) and PDF documents
-- **OCR Processing**: Automatic text extraction using OCR.space API
+- **AI-Powered Text Extraction**: Advanced text extraction using Google Gemini API
+- **Unified Transaction Layout**: All transactions use a clean, mobile payment-style interface
+- **Structured Data Extraction**: AI-powered extraction of sender, receiver, amounts, and transaction details
 - **Customer Management**: View and manage resident profiles
-- **Data Matching**: Automatically match extracted text with customer names
-- **Profile Integration**: Add extracted document data to customer profiles
+- **Data Export**: Download transaction data as Excel or text files
 
 ## Technology Stack
 
 - **Frontend**: React 18 with Vite
 - **Styling**: Tailwind CSS
-- **OCR Service**: OCR.space API (Free tier: 25,000 requests/month)
-- **File Support**: JPG, PNG, PDF (up to 5MB for free tier)
+- **AI Service**: Google Gemini API for intelligent text extraction
+- **File Support**: JPG, PNG, PDF (up to 20MB)
 
 ## Getting Started
 
@@ -43,40 +44,40 @@ A React application built with Vite and Tailwind CSS that allows residents to up
 
 ### For Housing Society Administrators
 
-1. **Upload Documents**: Use the document upload area to process resident documents
-2. **Review Extracted Data**: View the OCR-extracted text from uploaded documents
-3. **Match Customers**: The system automatically suggests customer matches based on names found in the text
-4. **Add to Profiles**: Click "Add Document" to associate the extracted data with a customer profile
+1. **Upload Documents**: Use the document upload area to process transaction receipts and documents
+2. **Review Extracted Data**: View the structured transaction data with sender, receiver, amounts, and details
+3. **Export Data**: Download transaction data as Excel or text files for record keeping
+4. **Manage Users**: View and manage resident profiles and their associated documents
 
 ### For Residents
 
-1. **Upload Bills**: Upload monthly utility bills, maintenance receipts, or other documents
-2. **Automatic Processing**: The system extracts text and matches it with your profile
-3. **Profile Updates**: Your document data is automatically added to your profile
+1. **Upload Transaction Receipts**: Upload mobile payment receipts, bank transfers, or other transaction documents
+2. **Automatic Processing**: The system extracts structured data including sender, receiver, amounts, and transaction details
+3. **Clean Interface**: All transactions are displayed in a unified, easy-to-read mobile payment format
 
 ## OCR API Configuration
 
-The application uses OCR.space API with the following configuration:
+The application uses Google Gemini API for intelligent text extraction:
 
-- **API Key**: `K89756115288957` (Free tier)
-- **Engine**: OCR Engine 2 (better text recognition)
-- **Language**: English
-- **Features**: 
-  - Orientation detection
-  - Image scaling for better results
-  - Multi-page PDF support
+### Gemini API
+- **API Key**: `AIzaSyBI0M-FLQUpNRw_rgHPb5gS0ZuJ7NXV4bc`
+- **Features**: Advanced AI-powered text extraction, structured data parsing, high accuracy
+- **Model**: Gemini 2.0 Flash (optimized for speed and cost)
+- **Capabilities**: Extracts transaction details, sender/receiver information, amounts, and dates
+
 
 ## File Requirements
 
 - **Supported Formats**: JPG, JPEG, PNG, PDF
-- **File Size**: Maximum 5MB (free tier limit)
+- **File Size**: Maximum 20MB
 - **Quality**: Higher resolution images provide better OCR results
 
 ## API Limits
 
-- **Free Tier**: 25,000 requests per month
-- **Rate Limit**: 500 requests per day per IP
-- **File Size**: 1MB limit for free tier (upgraded to 5MB in code)
+- **Gemini API**: Pay-per-use pricing model
+- **Rate Limiting**: Based on Google Cloud quotas
+- **File Size**: 20MB maximum per file
+- **Concurrent Requests**: Based on your Google Cloud project limits
 
 ## Customization
 
@@ -97,14 +98,13 @@ const [customers, setCustomers] = useState([
 ])
 ```
 
-### Modifying OCR Settings
+### Modifying AI Settings
 
-Update the OCR configuration in `src/services/OCRService.js`:
+Update the Gemini configuration in `src/services/GeminiService.js`:
 
 ```javascript
-formData.append('language', 'eng') // Change language
-formData.append('OCREngine', '2') // Switch between engines 1 and 2
-formData.append('detectOrientation', 'true') // Enable/disable orientation detection
+const API_KEY = 'your-gemini-api-key' // Update API key
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'
 ```
 
 ## Deployment
@@ -133,9 +133,10 @@ The built files in the `dist` directory can be deployed to any static hosting se
 
 ### API Errors
 
-- **Rate Limit Exceeded**: Wait 24 hours or upgrade to PRO plan
-- **File Too Large**: Compress images or split PDFs
-- **Invalid API Key**: Verify the API key in OCRService.js
+- **Rate Limit Exceeded**: Check your Google Cloud quotas and billing
+- **File Too Large**: Compress images or split PDFs (max 20MB)
+- **Invalid API Key**: Verify the API key in GeminiService.js
+- **403 Forbidden**: Ensure your Gemini API key has proper permissions
 
 ## Support
 

@@ -3,7 +3,6 @@ import OCRService from '../services/OCRService'
 
 const DocumentUpload = ({ onUpload, isProcessing }) => {
   const [dragActive, setDragActive] = useState(false)
-  const [tableMode, setTableMode] = useState(false)
   const fileInputRef = useRef(null)
 
   const handleDrag = (e) => {
@@ -58,11 +57,6 @@ const DocumentUpload = ({ onUpload, isProcessing }) => {
     fileInputRef.current.click()
   }
 
-  const toggleTableMode = () => {
-    const newMode = !tableMode
-    setTableMode(newMode)
-    OCRService.setTableMode(newMode)
-  }
 
   return (
     <div className="w-full">
@@ -127,27 +121,25 @@ const DocumentUpload = ({ onUpload, isProcessing }) => {
         </div>
       )}
 
-      {/* OCR Mode Toggle */}
-      {/* <div className="mt-6 bg-gray-50 border border-gray-200 rounded-xl p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-1">AI Table Detection</h3>
-            <p className="text-sm text-gray-600">
-              {tableMode ? 'Table detection enabled (better for structured data)' : 'Table detection disabled (raw text extraction)'}
+      {/* OCR Engine Info */}
+      <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-6">
+        <div className="flex items-center">
+          <div className="flex-shrink-0">
+            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+          </div>
+          <div className="ml-3">
+            <h3 className="font-semibold text-blue-900 mb-1">AI-Powered Text Extraction</h3>
+            <p className="text-sm text-blue-700">
+              Using Gemini AI for intelligent text extraction and structured data parsing
             </p>
           </div>
-          <button
-            onClick={toggleTableMode}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-              tableMode
-                ? 'bg-green-600 text-white hover:bg-green-700 shadow-md'
-                : 'bg-gray-600 text-white hover:bg-gray-700 shadow-md'
-            }`}
-          >
-            {tableMode ? 'Table Mode ON' : 'Table Mode OFF'}
-          </button>
         </div>
-      </div> */}
+      </div>
+
 
       {/* Instructions */}
       <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
@@ -155,20 +147,20 @@ const DocumentUpload = ({ onUpload, isProcessing }) => {
         <ol className="text-sm text-blue-800 space-y-2">
           <li className="flex items-start">
             <span className="bg-blue-200 text-blue-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-0.5">1</span>
-            Upload a document (image or PDF)
+            Upload a transaction document (image or PDF)
           </li>
           <li className="flex items-start">
             <span className="bg-blue-200 text-blue-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-0.5">2</span>
-            Our AI system will extract all text
+            Gemini AI extracts structured transaction data
           </li>
-          {/* <li className="flex items-start">
+          <li className="flex items-start">
             <span className="bg-blue-200 text-blue-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-0.5">3</span>
-            View the extracted text on the next screen
+            View formatted transaction details
           </li>
           <li className="flex items-start">
             <span className="bg-blue-200 text-blue-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-0.5">4</span>
-            Copy or download the results
-          </li> */}
+            Export or save the results
+          </li>
         </ol>
       </div>
     </div>
