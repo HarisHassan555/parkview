@@ -1,6 +1,49 @@
 import * as XLSX from 'xlsx';
 
 /**
+ * Normalize date formats for comparison
+ * Converts extracted date format (03-Sep-2025 at 08:56:05 PM) to Excel format (3-Sep-25)
+ */
+export const normalizeDateForComparison = (dateString) => {
+  if (!dateString) return null;
+  
+  try {
+    // Handle extracted date format: "03-Sep-2025 at 08:56:05 PM"
+    const extractedDateMatch = dateString.match(/(\d{1,2})-([A-Za-z]{3})-(\d{4})/);
+    if (extractedDateMatch) {
+      const [, day, month, year] = extractedDateMatch;
+      // Convert to Excel format: "3-Sep-25"
+      const shortYear = year.slice(-2);
+      return `${parseInt(day)}-${month}-${shortYear}`;
+    }
+    
+    // Handle Excel format: "3-Sep-25" (already normalized)
+    const excelDateMatch = dateString.match(/(\d{1,2})-([A-Za-z]{3})-(\d{2})/);
+    if (excelDateMatch) {
+      return dateString; // Already in correct format
+    }
+    
+    // Handle other date formats if needed
+    return dateString;
+  } catch (error) {
+    console.error('Error normalizing date:', error);
+    return dateString;
+  }
+};
+
+/**
+ * Compare two dates for matching (with tolerance for format differences)
+ */
+export const compareDates = (date1, date2) => {
+  if (!date1 || !date2) return false;
+  
+  const normalizedDate1 = normalizeDateForComparison(date1);
+  const normalizedDate2 = normalizeDateForComparison(date2);
+  
+  return normalizedDate1 === normalizedDate2;
+};
+
+/**
  * Read and analyze the BankStatementNew.xlsx file to understand its structure
  */
 export const analyzeBankStatementExcel = async () => {
@@ -102,34 +145,56 @@ export const compareDocumentWithExcelFlexible = (document, excelEntry) => {
   let matchCount = 0;
   const matches = [];
   
-  // Strict comparison logic - ALL 3 conditions must be met
+  // New comparison logic - 5 conditions, need any 3 to match
   const comparisonResults = {
-    amountMatch: false,
-    accountMatch: false,
-    nameMatch: false
+    dateMatch: false,
+    depositMatch: false,
+    sourceAccountMatch: false,
+    destinationAccountMatch: false,
+    senderNameMatch: false
   };
   
-  // 1. Compare Amount with Deposit ONLY (not Withdrawal)
+  // 1. Compare Txn. Date with Txn. Date from Excel
+  const docDate = paymentData.date;
+  console.log('📅 Date comparison:', {
+    docDate,
+    excelTxnDate: excelEntry['Txn. Date']
+  });
+  
+  if (docDate) {
+    const excelTxnDate = excelEntry['Txn. Date'];
+    if (excelTxnDate) {
+      if (compareDates(docDate, excelTxnDate)) {
+        comparisonResults.dateMatch = true;
+        matchCount++;
+        matches.push({
+          field: 'date',
+          docValue: docDate,
+          excelValue: excelTxnDate,
+          excelField: 'Txn. Date'
+        });
+      }
+    }
+  }
+  
+  // 2. Compare Deposit with Deposit from Excel
   const docAmount = paymentData.amount;
-  console.log('💰 Amount comparison (Deposit only):', {
+  console.log('💰 Deposit comparison:', {
     docAmount,
-    docAmountType: typeof docAmount,
     excelDeposit: excelEntry['Deposit']
   });
   
   if (docAmount) {
     const docNum = parseFloat(docAmount.toString().replace(/[^\d.-]/g, ''));
-    
-    // Use exact column name: "Deposit"
     const depositValue = excelEntry['Deposit'];
     
     if (depositValue && depositValue !== '0' && depositValue !== 0) {
       const excelNum = parseFloat(depositValue.toString().replace(/[^\d.-]/g, ''));
       if (!isNaN(docNum) && !isNaN(excelNum) && docNum === excelNum) {
-        comparisonResults.amountMatch = true;
+        comparisonResults.depositMatch = true;
         matchCount++;
         matches.push({
-          field: 'amount',
+          field: 'deposit',
           docValue: docAmount,
           excelValue: depositValue,
           excelField: 'Deposit'
@@ -138,54 +203,76 @@ export const compareDocumentWithExcelFlexible = (document, excelEntry) => {
     }
   }
   
-  // 2. Compare Sender Account with Source Account ONLY
+  // 3. Compare Source Account last 4 digits
   const docFromAccount = paymentData.fromAccount;
-  
-  console.log('🏦 Sender Account comparison:', {
+  console.log('🏦 Source Account comparison (last 4 digits):', {
     docFromAccount,
     excelSourceAccount: excelEntry['Source Account']
   });
   
   if (docFromAccount) {
-    // Use exact column name: "Source Account"
     const sourceAccount = excelEntry['Source Account'];
-    
-    // ONLY check if sender account matches source account
-    if (sourceAccount && docFromAccount.toString().trim() === sourceAccount.toString().trim()) {
-      comparisonResults.accountMatch = true;
-      matchCount++;
-      matches.push({
-        field: 'fromAccount',
-        docValue: docFromAccount,
-        excelValue: sourceAccount,
-        excelField: 'Source Account'
-      });
+    if (sourceAccount) {
+      const docLast4 = docFromAccount.toString().slice(-4);
+      const excelLast4 = sourceAccount.toString().slice(-4);
+      
+      if (docLast4 === excelLast4 && docLast4.length === 4) {
+        comparisonResults.sourceAccountMatch = true;
+        matchCount++;
+        matches.push({
+          field: 'sourceAccount',
+          docValue: docFromAccount,
+          excelValue: sourceAccount,
+          excelField: 'Source Account'
+        });
+      }
     }
   }
   
-  // 3. Extract and compare SENDER name from Narration / Transaction Detail
-  const docFromName = paymentData.fromName;
+  // 4. Compare Destination Account last 4 digits
+  const docToAccount = paymentData.toAccount;
+  console.log('🏦 Destination Account comparison (last 4 digits):', {
+    docToAccount,
+    excelDestinationAccount: excelEntry['Destination Account']
+  });
   
-  console.log('👤 Sender Name comparison:', {
+  if (docToAccount) {
+    const destinationAccount = excelEntry['Destination Account'];
+    if (destinationAccount) {
+      const docLast4 = docToAccount.toString().slice(-4);
+      const excelLast4 = destinationAccount.toString().slice(-4);
+      
+      if (docLast4 === excelLast4 && docLast4.length === 4) {
+        comparisonResults.destinationAccountMatch = true;
+        matchCount++;
+        matches.push({
+          field: 'destinationAccount',
+          docValue: docToAccount,
+          excelValue: destinationAccount,
+          excelField: 'Destination Account'
+        });
+      }
+    }
+  }
+  
+  // 5. Search Sender Name in Narration / Transaction Detail
+  const docFromName = paymentData.fromName;
+  console.log('👤 Sender Name search in Narration:', {
     docFromName,
-    narration: excelEntry['Narration / Transaction Detail']?.substring(0, 100) + '...', // Show first 100 chars
-    narrationLength: excelEntry['Narration / Transaction Detail']?.length
+    narration: excelEntry['Narration / Transaction Detail']?.substring(0, 100) + '...'
   });
   
   if (docFromName) {
-    // Use exact column name: "Narration / Transaction Detail"
     const narration = excelEntry['Narration / Transaction Detail'];
-    
     if (narration) {
       const narrationText = narration.toString().toLowerCase();
       const senderName = docFromName.toString().toLowerCase();
       
-      // Check if sender name appears in narration
       if (narrationText.includes(senderName)) {
-        comparisonResults.nameMatch = true;
+        comparisonResults.senderNameMatch = true;
         matchCount++;
         matches.push({
-          field: 'fromName',
+          field: 'senderName',
           docValue: docFromName,
           excelValue: narration,
           excelField: 'Narration / Transaction Detail'
@@ -194,32 +281,36 @@ export const compareDocumentWithExcelFlexible = (document, excelEntry) => {
     }
   }
   
-  // Success criteria: ANY 2 of 3 conditions must be met (flexible verification)
+  // Success criteria: ANY 3 of 5 conditions must be met
   const keyMatches = [
-    comparisonResults.amountMatch,
-    comparisonResults.accountMatch,
-    comparisonResults.nameMatch
+    comparisonResults.dateMatch,
+    comparisonResults.depositMatch,
+    comparisonResults.sourceAccountMatch,
+    comparisonResults.destinationAccountMatch,
+    comparisonResults.senderNameMatch
   ].filter(Boolean).length;
   
-  const isVerified = keyMatches >= 2;
+  const isVerified = keyMatches >= 3;
   
-  console.log('🎯 Final comparison results (FLEXIBLE):', {
+  console.log('🎯 Final comparison results (NEW CRITERIA):', {
     comparisonResults,
     keyMatches,
     isVerified,
     matchCount,
     matches,
     requirements: {
-      amountMatch: comparisonResults.amountMatch,
-      accountMatch: comparisonResults.accountMatch,
-      nameMatch: comparisonResults.nameMatch
+      dateMatch: comparisonResults.dateMatch,
+      depositMatch: comparisonResults.depositMatch,
+      sourceAccountMatch: comparisonResults.sourceAccountMatch,
+      destinationAccountMatch: comparisonResults.destinationAccountMatch,
+      senderNameMatch: comparisonResults.senderNameMatch
     }
   });
   
   return {
-    isMatch: isVerified, // ANY 2 of 3 conditions must be true
+    isMatch: isVerified, // ANY 3 of 5 conditions must be true
     matchCount,
-    totalFields: 3,
+    totalFields: 5,
     matches,
     comparisonResults
   };
@@ -229,5 +320,7 @@ export default {
   analyzeBankStatementExcel,
   getFieldMappings,
   findMatchingField,
-  compareDocumentWithExcelFlexible
+  compareDocumentWithExcelFlexible,
+  normalizeDateForComparison,
+  compareDates
 };

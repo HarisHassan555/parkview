@@ -217,14 +217,19 @@ export const syncWithUploadedExcel = async (excelData, selectedMonth = null) => 
           results.verified.push({
             documentId: document.id,
             fileName: document.fileName,
-            matchedEntry: matchedEntry
+            documentData: document.extractedData, // Include document data
+            documentType: document.documentType, // Include document type
+            matchedEntry: matchedEntry,
+            matchDetails: matchedEntry.matchDetails || null,
+            matchedFields: matchedEntry.matchDetails?.matches || []
           });
           verifiedCount++;
         } else {
           await updateDocumentVerification(document.id, 'not found');
           results.notFound.push({
             documentId: document.id,
-            fileName: document.fileName
+            fileName: document.fileName,
+            reason: 'No matching criteria met (need 3 of 5 conditions)'
           });
           notFoundCount++;
         }

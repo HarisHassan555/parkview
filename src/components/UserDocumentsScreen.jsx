@@ -3,7 +3,9 @@ import { getUserDocuments, getDocumentById } from '../firebase/documentService';
 import { getUserById } from '../firebase/userService';
 import { exportMonthlyDocumentsToExcel, getAvailableMonths, filterDocumentsByMonth } from '../utils/monthlyExport';
 import { syncWithUploadedExcel, getVerificationStats, clearVerificationStatus } from '../utils/syncUtility';
+import { exportReconciledReport } from '../utils/transactionTableMapper';
 import SimpleExcelDropbox from './SimpleExcelDropbox';
+import TransactionTable from './TransactionTable';
 
 const UserDocumentsScreen = ({ userId, onBackToUsers, onViewDocument }) => {
   const [user, setUser] = useState(null);
@@ -22,6 +24,7 @@ const UserDocumentsScreen = ({ userId, onBackToUsers, onViewDocument }) => {
   const [syncResult, setSyncResult] = useState(null);
   const [activeExcelFile, setActiveExcelFile] = useState(null);
   const [showExcelDropbox, setShowExcelDropbox] = useState(false);
+  const [viewMode, setViewMode] = useState('cards'); // 'cards' or 'table'
 
   useEffect(() => {
     loadUserAndDocuments();
@@ -257,6 +260,23 @@ const UserDocumentsScreen = ({ userId, onBackToUsers, onViewDocument }) => {
     }
   };
 
+  // Handle reconciled report download
+  const handleDownloadReconciledReport = () => {
+    if (!syncResult || !syncResult.success || !activeExcelFile) {
+      alert('Please complete a successful sync first');
+      return;
+    }
+
+    try {
+      const timestamp = new Date().toISOString().split('T')[0];
+      const filename = `reconciled_report_${timestamp}.csv`;
+      exportReconciledReport(syncResult, activeExcelFile.data, filename);
+    } catch (error) {
+      console.error('Error downloading reconciled report:', error);
+      alert('Error downloading reconciled report');
+    }
+  };
+
   // Handle Excel file upload
   const handleExcelFileUpload = (fileData) => {
     setActiveExcelFile(fileData);
@@ -391,36 +411,122 @@ const UserDocumentsScreen = ({ userId, onBackToUsers, onViewDocument }) => {
       {/* Sync Result Popup */}
       {showSyncPopup && syncResult && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4 shadow-xl">
-            <div className="text-center">
-              {syncResult.success ? (
-                <>
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
-                  </div>
-                  <h3 className="text-xl font-semibold text-blue-900 mb-2">Sync Completed!</h3>
-                  {syncResult.totalProcessed === 0 ? (
-                    <p className="text-blue-800 mb-4">No documents found to sync.</p>
-                  ) : (
-                    <div className="text-blue-800 mb-4">
-                      <p className="mb-2">Processed: {syncResult.totalProcessed} documents</p>
-                      <p className="mb-2">Verified: {syncResult.verifiedCount}</p>
-                      <p className="mb-2">Not Found: {syncResult.notFoundCount}</p>
+          <div className="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 shadow-xl max-h-[90vh] overflow-y-auto">
+            {syncResult.success ? (
+              <>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-blue-900">Sync Completed!</h3>
+                  <button
+                    onClick={() => setShowSyncPopup(false)}
+                    className="text-gray-400 hover:text-gray-600"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                
+                {syncResult.totalProcessed === 0 ? (
+                  <p className="text-blue-800 mb-4">No documents found to sync.</p>
+                ) : (
+                  <>
+                    {/* Summary Stats */}
+                    <div className="grid grid-cols-3 gap-4 mb-6">
+                      <div className="bg-blue-50 p-4 rounded-lg text-center">
+                        <div className="text-2xl font-bold text-blue-600">{syncResult.totalProcessed}</div>
+                        <div className="text-sm text-blue-800">Total Processed</div>
+                      </div>
+                      <div className="bg-green-50 p-4 rounded-lg text-center">
+                        <div className="text-2xl font-bold text-green-600">{syncResult.verifiedCount}</div>
+                        <div className="text-sm text-green-800">Verified</div>
+                      </div>
+                      <div className="bg-red-50 p-4 rounded-lg text-center">
+                        <div className="text-2xl font-bold text-red-600">{syncResult.notFoundCount}</div>
+                        <div className="text-sm text-red-800">Not Found</div>
+                      </div>
                     </div>
-                  )}
-                </>
-              ) : (
-                <>
-                  <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <div className="w-8 h-8 bg-red-500 rounded-full"></div>
-                  </div>
-                  <h3 className="text-xl font-semibold text-red-600 mb-2">Sync Failed</h3>
-                  <p className="text-red-500 mb-4">{syncResult.error}</p>
-                </>
-              )}
+
+                    {/* Detailed Results */}
+                    {syncResult.results && (
+                      <div className="space-y-4">
+                        {/* Verified Documents */}
+                        {syncResult.results.verified && syncResult.results.verified.length > 0 && (
+                          <div>
+                            <h4 className="text-lg font-semibold text-green-800 mb-3 flex items-center">
+                              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                              Verified Documents ({syncResult.results.verified.length})
+                            </h4>
+                            <div className="space-y-2 max-h-60 overflow-y-auto">
+                              {syncResult.results.verified.map((item, index) => (
+                                <div key={index} className="bg-green-50 p-3 rounded-lg border border-green-200">
+                                  <div className="font-medium text-green-900">{item.fileName}</div>
+                                  {item.matchedFields && item.matchedFields.length > 0 && (
+                                    <div className="mt-2">
+                                      <div className="text-sm text-green-700 mb-1">Matched Fields:</div>
+                                      <div className="flex flex-wrap gap-1">
+                                        {item.matchedFields.map((match, matchIndex) => (
+                                          <span key={matchIndex} className="bg-green-200 text-green-800 px-2 py-1 rounded text-xs">
+                                            {match.field}: {match.docValue} ↔ {match.excelValue}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Not Found Documents */}
+                        {syncResult.results.notFound && syncResult.results.notFound.length > 0 && (
+                          <div>
+                            <h4 className="text-lg font-semibold text-red-800 mb-3 flex items-center">
+                              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                              Not Found Documents ({syncResult.results.notFound.length})
+                            </h4>
+                            <div className="space-y-2 max-h-60 overflow-y-auto">
+                              {syncResult.results.notFound.map((item, index) => (
+                                <div key={index} className="bg-red-50 p-3 rounded-lg border border-red-200">
+                                  <div className="font-medium text-red-900">{item.fileName}</div>
+                                  <div className="text-sm text-red-700 mt-1">{item.reason}</div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-8 h-8 bg-red-500 rounded-full"></div>
+                </div>
+                <h3 className="text-xl font-semibold text-red-600 mb-2">Sync Failed</h3>
+                <p className="text-red-500 mb-4">{syncResult.error}</p>
+              </>
+            )}
+            
+            <div className="mt-6 flex justify-between">
+              <button
+                onClick={handleDownloadReconciledReport}
+                className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download Reconciled Report
+              </button>
               <button
                 onClick={() => setShowSyncPopup(false)}
-                className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+                className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
               >
                 Close
               </button>
@@ -478,6 +584,32 @@ const UserDocumentsScreen = ({ userId, onBackToUsers, onViewDocument }) => {
                         • Excel file loaded: {activeExcelFile.fileName}
                       </span>
                     )}
+                  </div>
+                </div>
+                
+                {/* View Toggle */}
+                <div className="flex gap-2">
+                  <div className="flex bg-gray-100 rounded-lg p-1">
+                    <button
+                      onClick={() => setViewMode('cards')}
+                      className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                        viewMode === 'cards' 
+                          ? 'bg-white text-gray-900 shadow-sm' 
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      Cards
+                    </button>
+                    <button
+                      onClick={() => setViewMode('table')}
+                      className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                        viewMode === 'table' 
+                          ? 'bg-white text-gray-900 shadow-sm' 
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      Table
+                    </button>
                   </div>
                 </div>
                 
@@ -658,8 +790,15 @@ const UserDocumentsScreen = ({ userId, onBackToUsers, onViewDocument }) => {
               </div>
 
               {/* Table Body */}
-              <div className="divide-y divide-gray-200">
-                {filteredDocuments.map((document) => (
+              {viewMode === 'table' ? (
+                <TransactionTable 
+                  documents={filteredDocuments}
+                  title={`${user?.name || 'User'} Transaction Data`}
+                  showDownload={true}
+                />
+              ) : (
+                <div className="divide-y divide-gray-200">
+                  {filteredDocuments.map((document) => (
                   <div
                     key={document.id}
                      onClick={() => onViewDocument(document.id, document.fileName, document.documentType)}
@@ -757,7 +896,8 @@ const UserDocumentsScreen = ({ userId, onBackToUsers, onViewDocument }) => {
                     </div> */}
                   </div>
                 ))}
-              </div>
+                </div>
+              )}
             </div>
           )}
         </div>
