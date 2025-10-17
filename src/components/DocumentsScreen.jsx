@@ -347,17 +347,22 @@ const DocumentsScreen = ({ onBackToUpload }) => {
   // Handle reconciled report download
   const handleDownloadReconciledReport = () => {
     if (!syncResult || !syncResult.success || !activeExcelFile) {
-      alert('Please complete a successful sync first');
+      console.warn('Download reconcile button clicked but conditions not met:', {
+        syncResult: !!syncResult,
+        syncSuccess: syncResult?.success,
+        activeExcelFile: !!activeExcelFile
+      });
       return;
     }
 
     try {
       const timestamp = new Date().toISOString().split('T')[0];
       const filename = `reconciled_report_${timestamp}.csv`;
+      console.log('Downloading reconciled report:', { filename, syncResult, activeExcelFile });
       exportReconciledReport(syncResult, activeExcelFile.data, filename);
     } catch (error) {
       console.error('Error downloading reconciled report:', error);
-      alert('Error downloading reconciled report');
+      alert('Error downloading reconciled report: ' + error.message);
     }
   };
 
@@ -534,7 +539,17 @@ const DocumentsScreen = ({ onBackToUpload }) => {
             <div className="mt-6 flex justify-between">
               <button
                 onClick={handleDownloadReconciledReport}
-                className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors flex items-center gap-2"
+                disabled={!syncResult || !syncResult.success || !activeExcelFile}
+                className={`py-2 px-4 rounded-lg transition-colors flex items-center gap-2 ${
+                  (!syncResult || !syncResult.success || !activeExcelFile)
+                    ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
+                    : 'bg-green-500 text-white hover:bg-green-600'
+                }`}
+                title={
+                  (!syncResult || !syncResult.success || !activeExcelFile)
+                    ? 'Please complete a successful sync first'
+                    : 'Download reconciled report'
+                }
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

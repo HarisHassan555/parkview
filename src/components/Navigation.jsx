@@ -59,6 +59,16 @@ const Navigation = ({
       description: 'Sync with Excel data'
     },
     {
+      id: 'comparison',
+      label: 'Comparison',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+      ),
+      description: 'Compare reports'
+    },
+    {
       id: 'dashboard',
       label: 'Dashboard',
       icon: (
@@ -136,8 +146,8 @@ const Navigation = ({
     
     return {
       type: 'default',
-      title: 'DSG Recon',
-      subtitle: 'AI IBFT Reader',
+      title: 'AI IBFT Reader',
+      subtitle: 'Inter Bank Funds Transfer Processing',
       showNavigation: true
     };
   };
@@ -160,10 +170,8 @@ const Navigation = ({
               </button>
             ) : (
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
+                <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center mr-3">
+                  <div className="w-4 h-4 bg-white rounded-sm"></div>
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-gray-900">{navState.title}</h1>
@@ -228,6 +236,11 @@ const Navigation = ({
               </div>
             ) : navState.showNavigation ? (
               <>
+                {/* System Status */}
+                <div className="hidden lg:flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-xs text-gray-500">System Online</span>
+                </div>
 
                 {/* User Count Only - Show only when Users tab is active */}
                 {currentScreen === 'users' && (

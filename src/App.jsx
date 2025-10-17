@@ -9,6 +9,8 @@ import DashboardScreen from './components/DashboardScreen'
 import FirebaseSetupGuide from './components/FirebaseSetupGuide'
 import Navigation from './components/Navigation'
 import ExcelSyncUpload from './components/ExcelSyncUpload'
+import TopActiveUsers from './components/TopActiveUsers'
+import ComparisonScreen from './components/ComparisonScreen'
 import OCRService from './services/OCRService'
 import { parseMobilePaymentReceipt } from './utils/mobilePaymentParser'
 import { createUser, clearAllData } from './firebase/userService'
@@ -485,29 +487,237 @@ function App() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 ">
+      <div className="flex-1">
         {currentScreen === 'upload' && (
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-              <DocumentUpload 
-                onUpload={handleDocumentUpload}
-                isProcessing={isProcessing}
-              />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            {/* Key Metrics Row */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Volume</p>
+                    <p className="text-2xl font-bold text-gray-900">${documentCount * 25000 || 0}</p>
+                  </div>
+                  <div className="p-2 bg-blue-100 rounded-lg">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Processed</p>
+                    <p className="text-2xl font-bold text-gray-900">{documentCount}</p>
+                  </div>
+                  <div className="p-2 bg-green-100 rounded-lg">
+                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Pending</p>
+                    <p className="text-2xl font-bold text-gray-900">0</p>
+                  </div>
+                  <div className="p-2 bg-yellow-100 rounded-lg">
+                    <svg className="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Flagged</p>
+                    <p className="text-2xl font-bold text-gray-900">0</p>
+                  </div>
+                  <div className="p-2 bg-orange-100 rounded-lg">
+                    <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            {/* Clear Database Section */}
-            <div className="mt-8 bg-red-50 border border-red-200 rounded-xl p-6">
+
+            {/* Main Content Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Left Side - Upload */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">Upload Transaction File</h2>
+                <DocumentUpload 
+                  onUpload={handleDocumentUpload}
+                  isProcessing={isProcessing}
+                />
+              </div>
+
+              {/* Right Side - Our Dashboard */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-semibold text-gray-900">Analytics Dashboard</h2>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-xs text-gray-500">System Online</span>
+                  </div>
+                </div>
+                
+                {/* Our Dashboard Content */}
+                <DashboardScreen />
+              </div>
+            </div>
+
+            {/* Full Width Analytics Row */}
+            <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-4">
+              {/* Top Active Users */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Top Active Users</h3>
+                <TopActiveUsers />
+              </div>
+
+              {/* Document Type Distribution */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Document Types</h3>
+                <div className="flex items-center justify-center">
+                  <div className="relative" style={{ width: 120, height: 120 }}>
+                    <svg width={120} height={120} className="transform -rotate-90">
+                      <circle
+                        cx={60}
+                        cy={60}
+                        r={50}
+                        fill="none"
+                        stroke="#93C5FD"
+                        strokeWidth="12"
+                        strokeDasharray="75.4 75.4"
+                        strokeDashoffset="0"
+                      />
+                      <circle
+                        cx={60}
+                        cy={60}
+                        r={50}
+                        fill="none"
+                        stroke="#6EE7B7"
+                        strokeWidth="12"
+                        strokeDasharray="75.4 75.4"
+                        strokeDashoffset="-37.7"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="text-xl font-bold text-gray-900">{documentCount}</div>
+                        <div className="text-xs text-gray-500">Total</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: '#93C5FD' }}></div>
+                      <span className="text-sm text-gray-700">Mobile Payments</span>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">{documentCount}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: '#6EE7B7' }}></div>
+                      <span className="text-sm text-gray-700">Bank Statements</span>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">0</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Verification Status */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Verification Status</h3>
+                <div className="flex items-center justify-center">
+                  <div className="relative" style={{ width: 120, height: 120 }}>
+                    <svg width={120} height={120} className="transform -rotate-90">
+                      <circle
+                        cx={60}
+                        cy={60}
+                        r={50}
+                        fill="none"
+                        stroke="#BBF7D0"
+                        strokeWidth="12"
+                        strokeDasharray="75.4 75.4"
+                        strokeDashoffset="0"
+                      />
+                      <circle
+                        cx={60}
+                        cy={60}
+                        r={50}
+                        fill="none"
+                        stroke="#E5E7EB"
+                        strokeWidth="12"
+                        strokeDasharray="75.4 75.4"
+                        strokeDashoffset="-37.7"
+                      />
+                      <circle
+                        cx={60}
+                        cy={60}
+                        r={50}
+                        fill="none"
+                        stroke="#FECACA"
+                        strokeWidth="12"
+                        strokeDasharray="75.4 75.4"
+                        strokeDashoffset="-75.4"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="text-xl font-bold text-gray-900">{documentCount}</div>
+                        <div className="text-xs text-gray-500">Total</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: '#BBF7D0' }}></div>
+                      <span className="text-sm text-gray-700">Verified</span>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">0</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: '#E5E7EB' }}></div>
+                      <span className="text-sm text-gray-700">Unverified</span>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">{documentCount}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: '#FECACA' }}></div>
+                      <span className="text-sm text-gray-700">Not Found</span>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Database Management - Hidden by default, can be accessed via navigation */}
+            <div className="mt-6 bg-red-50 border border-red-200 rounded-xl p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-red-900 mb-2">Database Management</h3>
-                  <p className="text-sm text-red-700">
-                    Clear all users and documents from the database to start fresh
-                  </p>
+                  <h3 className="text-sm font-semibold text-red-900">Database Management</h3>
+                  <p className="text-xs text-red-700">Clear all data to start fresh</p>
                 </div>
                 <button
                   onClick={() => setShowClearConfirm(true)}
                   disabled={isClearing}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-red-400 disabled:cursor-not-allowed transition-colors"
+                  className="px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700 disabled:bg-red-400 disabled:cursor-not-allowed transition-colors"
                 >
                   {isClearing ? 'Clearing...' : 'Clear Database'}
                 </button>
@@ -525,6 +735,27 @@ function App() {
                 loadStats();
               }}
             />
+          </div>
+        )}
+
+        {currentScreen === 'comparison' && (
+          <div className="min-h-screen bg-gray-50">
+            <Navigation 
+              currentScreen={currentScreen}
+              onNavigate={handleNavigate}
+              userCount={userCount}
+              documentCount={documentCount}
+              userDocumentCount={userDocumentCount}
+              selectedUserId={selectedUserId}
+              selectedUserName={selectedUserName}
+              selectedDocumentId={selectedDocumentId}
+              selectedDocumentName={selectedDocumentName}
+              selectedDocumentType={selectedDocumentType}
+              onBackToUpload={handleBackToUpload}
+              onBackToUsers={handleBackToUsers}
+              onBackFromDocument={handleBackFromDocument}
+            />
+            <ComparisonScreen />
           </div>
         )}
         

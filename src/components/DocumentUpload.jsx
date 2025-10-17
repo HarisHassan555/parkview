@@ -61,7 +61,7 @@ const DocumentUpload = ({ onUpload, isProcessing }) => {
   return (
     <div className="w-full">
       <div
-        className={`relative border-2 border-dashed rounded-xl p-12 text-center transition-all duration-200 ${
+        className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200 ${
           dragActive 
             ? 'border-blue-500 bg-blue-50 shadow-lg' 
             : 'border-gray-300 hover:border-blue-400 hover:bg-gray-50'
@@ -80,89 +80,43 @@ const DocumentUpload = ({ onUpload, isProcessing }) => {
           disabled={isProcessing}
         />
         
-        <div className="space-y-6">
-          <div className="mx-auto w-16 h-16 text-gray-400">
+        <div className="space-y-4">
+          <div className="mx-auto w-12 h-12 text-gray-400">
             <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
           </div>
           
           <div>
-            <p className="text-xl font-medium text-gray-900 mb-2">
-              {isProcessing ? 'Processing document...' : 'Upload your document'}
-            </p>
-            <p className="text-gray-600 mb-4">
-              Drag and drop your file here, or click to browse
+            <p className="text-lg font-medium text-gray-900 mb-2">
+              {isProcessing ? 'Processing document...' : 'Drop your IBFT file here or click to browse'}
             </p>
             <p className="text-sm text-gray-500">
-              Supports: JPG, PNG, PDF (Max 5MB)
+              Supports: MT103, SWIFT, XML, CSV, JSON
             </p>
           </div>
           
           <button
             onClick={onButtonClick}
             disabled={isProcessing}
-            style={{ marginTop: '70px' }}
-            className={`px-8 py-3 rounded-lg font-semibold transition-all duration-200 ${
+            className={`px-6 py-2 rounded-lg font-medium transition-all duration-200 ${
               isProcessing
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg transform hover:-translate-y-0.5'
+                : 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg'
             }`}
           >
-            {isProcessing ? 'Processing...' : 'Choose File'}
+            {isProcessing ? 'Processing...' : 'Select File'}
           </button>
         </div>
       </div>
       
       {isProcessing && (
-        <div className="mt-6 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          <span className="ml-3 text-gray-600">Processing with AI...</span>
+        <div className="mt-4 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+          <span className="ml-2 text-sm text-gray-600">Processing with AI...</span>
         </div>
       )}
 
-      {/* OCR Engine Info */}
-      <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-6">
-        <div className="flex items-center">
-          <div className="flex-shrink-0">
-            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
-            </div>
-          </div>
-          <div className="ml-3">
-            <h3 className="font-semibold text-blue-900 mb-1">AI-Powered Text Extraction</h3>
-            <p className="text-sm text-blue-700">
-              Using Gemini AI for intelligent text extraction and structured data parsing
-            </p>
-          </div>
-        </div>
-      </div>
-
-
-      {/* Instructions */}
-      <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
-        <h3 className="font-semibold text-blue-900 mb-3">How it works:</h3>
-        <ol className="text-sm text-blue-800 space-y-2">
-          <li className="flex items-start">
-            <span className="bg-blue-200 text-blue-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-0.5">1</span>
-            Upload a transaction document (image or PDF)
-          </li>
-          <li className="flex items-start">
-            <span className="bg-blue-200 text-blue-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-0.5">2</span>
-            Gemini AI extracts structured transaction data
-          </li>
-          <li className="flex items-start">
-            <span className="bg-blue-200 text-blue-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-0.5">3</span>
-            View formatted transaction details
-          </li>
-          <li className="flex items-start">
-            <span className="bg-blue-200 text-blue-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-0.5">4</span>
-            Export or save the results
-          </li>
-        </ol>
-      </div>
     </div>
   )
 }

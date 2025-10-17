@@ -339,10 +339,10 @@ const DashboardScreen = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="flex items-center justify-center py-8">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading dashboard...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
+          <p className="text-gray-600 text-sm">Loading analytics...</p>
         </div>
       </div>
     );
@@ -351,16 +351,14 @@ const DashboardScreen = () => {
   const { analytics } = dashboardData;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Analytics Dashboard</h1>
-          <p className="text-gray-600 mt-2">Comprehensive insights into users and transactions</p>
-        </div>
+    <div className="w-full">
+      {/* Header */}
+      <div className="mb-6">
+        <p className="text-gray-600">Comprehensive insights into users and transactions</p>
+      </div>
 
-        {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      {/* Key Metrics */}
+      <div className="grid grid-cols-2 gap-4 mb-6">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
               <div className="p-2 bg-blue-100 rounded-lg">
@@ -418,50 +416,12 @@ const DashboardScreen = () => {
           </div>
         </div>
 
-        {/* Charts Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Document Types Pie Chart */}
-          <PieChart 
-            data={analytics.documentTypes} 
-            title="Document Types Distribution"
-            size={180}
-            filterType="document_type"
-          />
 
-          {/* Verification Status Pie Chart */}
-          <PieChart 
-            data={analytics.verificationStatus} 
-            title="Verification Status"
-            size={180}
-            filterType="verification"
-          />
-        </div>
 
-        {/* Top Active Users */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Active Users</h3>
-          <div className="space-y-3">
-            {analytics.userActivity.slice(0, 5).map((user, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-sm font-medium text-blue-600">{index + 1}</span>
-                  </div>
-                  <span className="text-sm font-medium text-gray-900">{user.name}</span>
-                </div>
-                <div className="text-right">
-                  <div className="text-sm font-medium text-gray-900">{user.documents} docs</div>
-                  <div className="text-xs text-gray-500">{user.verified} verified</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Filter Popup Modal */}
-        {selectedFilter && (
+      {/* Filter Popup Modal */}
+      {selectedFilter && (
           <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50" style={{pointerEvents: 'all'}}>
-            <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[80vh] overflow-hidden">
+            <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full mx-4 max-h-[80vh] overflow-hidden">
               <div className="flex items-center justify-between p-6 border-b border-gray-200">
                 <h3 className="text-xl font-semibold text-gray-900">
                   {selectedFilter.type === 'verification' 
@@ -570,7 +530,6 @@ const DashboardScreen = () => {
             </div>
           </div>
         )}
-      </div>
     </div>
   );
 };
